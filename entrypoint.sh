@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+set -x
 
 while true; do
 	echo `date` "/etc/hive-site.xml: "
