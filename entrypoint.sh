@@ -5,9 +5,14 @@ if [ "x$CONFPATH" == "x" ]; then
 	CONFPATH="/etc/hive-site.xml"
 fi
 
+DATA=""
+
 while true; do
-	echo `date` "$CONFPATH: "
-	cat $CONFPATH
-	curl -d "@$CONFPATH" "http://$DVOROSHOST:4434/data"
+	if [ "x$DATA" == "x" ]; then
+		DATA=`cat $CONFPATH`
+		echo `date` "$CONFPATH: "
+		cat $CONFPATH
+	fi
+	curl -d "$DATA" "http://$DVOROSHOST:4434/data"
 	sleep 15
 done
