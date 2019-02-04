@@ -1,9 +1,13 @@
 #!/bin/bash
 set -x
 
+if [ "x$CONFPATH" == "x" ]; then
+	CONFPATH="/etc/hive-site.xml"
+fi
+
 while true; do
-	echo `date` "/etc/hive-site.xml: "
-	cat /etc/hive-site.xml
-	curl -d "@/etc/hive-site.xml" "http://$DVOROSHOST:4434/data"
+	echo `date` "$CONFPATH: "
+	cat $CONFPATH
+	curl -d "@$CONFPATH" "http://$DVOROSHOST:4434/data"
 	sleep 15
 done
